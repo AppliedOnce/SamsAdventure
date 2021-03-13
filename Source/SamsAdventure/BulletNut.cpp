@@ -3,6 +3,7 @@
 
 #include "BulletNut.h"
 #include "Components/SphereComponent.h"
+#include "MainCharacter.h"
 
 // Sets default values
 ABulletNut::ABulletNut()
@@ -32,15 +33,33 @@ void ABulletNut::BeginPlay()
 void ABulletNut::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);						//Det under gjør at prosjektilen går framover
-	FVector NewLocation = GetActorLocation();
-	NewLocation += GetActorForwardVector() * speed * DeltaTime;
-	SetActorLocation(NewLocation, false);
+	
+	timeSurvived += DeltaTime;
 
+	if (timeSurvived > timeBeforeDestruction)
+	{
+		this->Destroy();
+	}
+	else
+	{
+		FVector NewLocation = GetActorLocation();
+		NewLocation += GetActorForwardVector() * speed * DeltaTime;
+		SetActorLocation(NewLocation, false);
+	}
 }
 												//Dette gjør sånn at når prosjektilen treffer noe, så skjer noe. den calles når den treffer noe
 void ABulletNut::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), *OtherActor->GetName());		//For å finne ut hva prosjektilen kolliderer med som gjør at den blir ødelagt
 
+	if (OtherActor->IsA(AMainCharacter::StaticClass()) || OtherActor->IsA(ABulletNut::StaticClass()))
+	{
+	
+	}
+	else
+	{
+		Destroy();
+	}
 }

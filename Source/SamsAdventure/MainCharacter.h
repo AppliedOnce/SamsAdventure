@@ -23,6 +23,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Projectile");
 	TSubclassOf<class ABulletNut> BulletBlueprint;
 
+	UPROPERTY(EditAnywhere, Category = "Projectile");
+	FVector BulletSpawnPoint{ 100.f, 0.f, 0.f };
+
 public:
 	// Sets default values for this character's properties
 	AMainCharacter();

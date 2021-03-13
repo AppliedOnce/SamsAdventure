@@ -66,6 +66,6 @@ void AMainCharacter::Shoot()
 
 	if (SamsWorld)
 	{
-		SamsWorld->SpawnActor<ABulletNut>(BulletBlueprint, GetActorLocation(), GetActorRotation());
+		SamsWorld->SpawnActor<ABulletNut>(BulletBlueprint, GetActorLocation() + BulletSpawnPoint, GetActorRotation());
 	}
 }
