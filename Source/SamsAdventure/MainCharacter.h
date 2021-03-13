@@ -20,6 +20,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera");
 	class UCameraComponent* PlayerCamera;
 
+	UPROPERTY(EditAnywhere, Category = "Projectile");
+	TSubclassOf<class ABulletNut> BulletBlueprint;
+
 public:
 	// Sets default values for this character's properties
 	AMainCharacter();
@@ -34,4 +37,5 @@ private:
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);
+	void Shoot();
 };
