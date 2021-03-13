@@ -5,6 +5,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "BulletNut.h"
 
 // Sets default values
 AMainCharacter::AMainCharacter()
@@ -46,6 +47,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("Forward", this, &AMainCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("Right", this, &AMainCharacter::MoveRight);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction("Shoot", IE_Pressed, this, &AMainCharacter::Shoot);
 }
 
 void AMainCharacter::MoveForward(float Value)
@@ -56,4 +58,14 @@ void AMainCharacter::MoveForward(float Value)
 void AMainCharacter::MoveRight(float Value)
 {
 	AddMovementInput(GetActorRightVector(), Value);
+}
+
+void AMainCharacter::Shoot()
+{
+	UWorld* SamsWorld = GetWorld();
+
+	if (SamsWorld)
+	{
+		SamsWorld->SpawnActor<ABulletNut>(BulletBlueprint, GetActorLocation(), GetActorRotation());
+	}
 }
