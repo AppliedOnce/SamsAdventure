@@ -27,7 +27,6 @@ void ATailAttack::BeginPlay()
 	Super::BeginPlay();
 
 	Cast<USphereComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &ATailAttack::OnOverlap);
-
 }
 
 // Called every frame
@@ -40,15 +39,13 @@ void ATailAttack::Tick(float DeltaTime)
 	{
 		this->Destroy();
 	}
-	
-
 }
 
 void ATailAttack::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	//UE_LOG(LogTemp, Warning, TEXT("%s"), *OtherActor->GetName());		//For å finne ut hva prosjektilen kolliderer med som gjør at den blir ødelagt
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), *OtherActor->GetName());
 
 	if (OtherActor->IsA(AMainCharacter::StaticClass()) || OtherActor->IsA(ABulletNut::StaticClass()))
 	{
@@ -56,13 +53,9 @@ void ATailAttack::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	}
 	else if(OtherActor->IsA(ABirdEnemy::StaticClass()))
 	{
-	 UE_LOG(LogTemp, Warning, TEXT("Hit"))
-	
-	OtherActor->Destroy();
-	 
-	 Destroy();
-
-
+		UE_LOG(LogTemp, Warning, TEXT("Hit"))
+		OtherActor->Destroy();
+		Destroy();
 	}
 }
 
