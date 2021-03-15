@@ -6,6 +6,8 @@
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "BulletNut.h"
+#include "Components/SphereComponent.h"
+#include "TailAttack.h"
 
 // Sets default values
 AMainCharacter::AMainCharacter()
@@ -20,6 +22,7 @@ AMainCharacter::AMainCharacter()
 	CameraArm->SetRelativeRotation(FRotator(-60.0, 90.f, 0.f));
 	CameraArm->bInheritYaw = false;
 	CameraArm->bDoCollisionTest = false;
+
 
 	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
 	PlayerCamera->SetupAttachment(CameraArm, USpringArmComponent::SocketName);
@@ -37,6 +40,9 @@ void AMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	FVector NewLocation = GetActorLocation() + (CurrentVelocity * DeltaTime);
+	SetActorLocation(NewLocation);
+
 }
 
 // Called to bind functionality to input
@@ -48,6 +54,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("Right", this, &AMainCharacter::MoveRight);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Shoot", IE_Pressed, this, &AMainCharacter::Shoot);
+	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AMainCharacter::Attack);
 }
 
 void AMainCharacter::MoveForward(float Value)
@@ -69,3 +76,17 @@ void AMainCharacter::Shoot()
 		SamsWorld->SpawnActor<ABulletNut>(BulletBlueprint, GetActorLocation() + BulletSpawnPoint, GetActorRotation());
 	}
 }
+
+
+void AMainCharacter::Attack() {
+	UWorld* SamsWorld = GetWorld();
+
+	UE_LOG(LogTemp, Warning, TEXT("Attack"))
+
+	if (SamsWorld)
+	{
+		SamsWorld->SpawnActor<ATailAttack>(AttackBlueprint, GetActorLocation()+ AttackSpawnPoint, GetActorRotation());
+	}
+
+}
+
