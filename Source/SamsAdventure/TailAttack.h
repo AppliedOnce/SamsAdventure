@@ -31,11 +31,9 @@ protected:
 	class UStaticMeshComponent* Mesh = nullptr;
 
 	UFUNCTION()
-		void OnOverlap(UPrimitiveComponent* OverlappedComponent,
-			AActor* OtherActor, UPrimitiveComponent* OtherComponent,
-			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-
+	void OnOverlap(UPrimitiveComponent* OverlappedComponent,
+		AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
