@@ -4,6 +4,8 @@
 #include "BirdEnemy.h"
 #include "MainCharacter.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/SphereComponent.h"
+
 
 
 // Sets default values
@@ -12,6 +14,11 @@ ABirdEnemy::ABirdEnemy()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+
+	Collider = CreateDefaultSubobject<USphereComponent>(TEXT("Collider"));
+	RootComponent = Collider;
+	Collider->SetGenerateOverlapEvents(true);
+	
 
 
 
@@ -25,7 +32,8 @@ void ABirdEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Cast<UCapsuleComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &ABirdEnemy::OnOverlap);
+	//Cast<UCapsuleComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &ABirdEnemy::OnOverlap);
+	Cast<USphereComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &ABirdEnemy::OnOverlap);
 
 	
 }

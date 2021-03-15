@@ -23,8 +23,23 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Projectile");
 	TSubclassOf<class ABulletNut> BulletBlueprint;
 
+
 	UPROPERTY(EditAnywhere, Category = "Projectile");
 	FVector BulletSpawnPoint{ 100.f, 0.f, 0.f };
+
+	UPROPERTY(EditAnywhere, Category = "Melee");
+	TSubclassOf<class ATailAttack> AttackBlueprint;
+
+	UPROPERTY(EditAnywhere, Category = "Melee");
+	FVector AttackSpawnPoint{ 0.f, 0.f, 0.f };
+
+	//An additional collision for the attack.
+	UPROPERTY(EditAnywhere, Category = "Setup");
+	class USphereComponent* Collider = nullptr;
+
+	
+
+	
 
 public:
 	// Sets default values for this character's properties
@@ -41,4 +56,7 @@ private:
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void Shoot();
+	void Attack();
+
+
 };
