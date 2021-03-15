@@ -16,7 +16,6 @@ ABulletNut::ABulletNut()
 	Collider->SetGenerateOverlapEvents(true);
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(RootComponent);
-
 }
 
 // Called when the game starts or when spawned

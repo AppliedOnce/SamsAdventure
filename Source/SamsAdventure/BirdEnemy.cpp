@@ -18,13 +18,6 @@ ABirdEnemy::ABirdEnemy()
 	Collider = CreateDefaultSubobject<USphereComponent>(TEXT("Collider"));
 	RootComponent = Collider;
 	Collider->SetGenerateOverlapEvents(true);
-	
-
-
-
-
-
-
 }
 
 // Called when the game starts or when spawned
@@ -34,8 +27,6 @@ void ABirdEnemy::BeginPlay()
 
 	//Cast<UCapsuleComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &ABirdEnemy::OnOverlap);
 	Cast<USphereComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &ABirdEnemy::OnOverlap);
-
-	
 }
 
 // Called every frame
@@ -56,16 +47,10 @@ void ABirdEnemy::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 	UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex,
 	bool bFromSweep, const FHitResult& SweepResult) 
 {
-	UE_LOG(LogTemp, Warning, TEXT("You got hit"))
+	UE_LOG(LogTemp, Warning, TEXT("You got hit by: %s"), *OtherActor->GetName());
 
-	if (OtherActor->IsA(AMainCharacter::StaticClass())) 
+	if (OtherActor->IsA(AMainCharacter::StaticClass()))
 	{
 
-		
-
-
-
 	}
-
-
 }

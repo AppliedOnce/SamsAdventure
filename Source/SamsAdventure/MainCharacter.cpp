@@ -8,6 +8,9 @@
 #include "BulletNut.h"
 #include "Components/SphereComponent.h"
 #include "TailAttack.h"
+#include "Components/CapsuleComponent.h"
+#include "BirdEnemy.h"
+#include "PlayerHealth.h"
 
 // Sets default values
 AMainCharacter::AMainCharacter()
@@ -26,6 +29,11 @@ AMainCharacter::AMainCharacter()
 
 	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
 	PlayerCamera->SetupAttachment(CameraArm, USpringArmComponent::SocketName);
+
+	collider = this->GetCapsuleComponent();
+	movementComp = GetCharacterMovement();
+
+	HealthComp = CreateDefaultSubobject<UPlayerHealth>(TEXT("PlayerHealth"));
 }
 
 // Called when the game starts or when spawned
@@ -33,15 +41,13 @@ void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	collider->OnComponentHit.AddDynamic(this, &AMainCharacter::OnHit);
 }
 
 // Called every frame
 void AMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	FVector NewLocation = GetActorLocation() + (CurrentVelocity * DeltaTime);
-	SetActorLocation(NewLocation);
 
 }
 
@@ -55,6 +61,8 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Shoot", IE_Pressed, this, &AMainCharacter::Shoot);
 	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AMainCharacter::Attack);
+	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &AMainCharacter::Run);
+	PlayerInputComponent->BindAction("Run", IE_Released, this, &AMainCharacter::StopRunning);
 }
 
 void AMainCharacter::MoveForward(float Value)
@@ -67,6 +75,16 @@ void AMainCharacter::MoveRight(float Value)
 	AddMovementInput(GetActorRightVector(), Value);
 }
 
+void AMainCharacter::Run()
+{
+	movementComp->MaxWalkSpeed = 800.f;
+}
+
+void AMainCharacter::StopRunning()
+{
+	movementComp->MaxWalkSpeed = 600.f;
+}
+
 void AMainCharacter::Shoot()
 {
 	UWorld* SamsWorld = GetWorld();
@@ -77,12 +95,10 @@ void AMainCharacter::Shoot()
 	}
 }
 
-
 void AMainCharacter::Attack() {
 	UWorld* SamsWorld = GetWorld();
 
-	UE_LOG(LogTemp, Warning, TEXT("Attack"))
-
+	UE_LOG(LogTemp, Warning, TEXT("Attack"));
 	if (SamsWorld)
 	{
 		SamsWorld->SpawnActor<ATailAttack>(AttackBlueprint, GetActorLocation()+ AttackSpawnPoint, GetActorRotation());
@@ -90,3 +106,12 @@ void AMainCharacter::Attack() {
 
 }
 
+void AMainCharacter::OnHit(UPrimitiveComponent* HitComponent,
+	AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	if (OtherActor->IsA(ABirdEnemy::StaticClass()))
+	{
+		HealthComp->LoseHp(1);
+		UE_LOG(LogTemp, Warning, TEXT("Player just hit: %s\nPlayer health: %i"), *OtherActor->GetName(), HealthComp->GetCurrentHp());
+	}
+}
