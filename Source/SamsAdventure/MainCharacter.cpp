@@ -91,7 +91,15 @@ void AMainCharacter::Shoot()
 
 	if (SamsWorld)
 	{
-		SamsWorld->SpawnActor<ABulletNut>(BulletBlueprint, GetActorLocation() + BulletSpawnPoint, GetActorRotation());
+		if (CurrentAmmo > 0)
+		{
+			SamsWorld->SpawnActor<ABulletNut>(BulletBlueprint, GetActorLocation() + BulletSpawnPoint, GetActorRotation());
+			CurrentAmmo--;
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Can't shoot, out of ammo!"));
+		}
 	}
 }
 
@@ -114,4 +122,16 @@ void AMainCharacter::OnHit(UPrimitiveComponent* HitComponent,
 		HealthComp->LoseHp(1);
 		UE_LOG(LogTemp, Warning, TEXT("Player just hit: %s\nPlayer health: %i"), *OtherActor->GetName(), HealthComp->GetCurrentHp());
 	}
+}
+
+void AMainCharacter::IncreaseAmmo(int value)
+{
+	CurrentAmmo += value;
+	if (CurrentAmmo > MaxAmmo)
+		CurrentAmmo = MaxAmmo;
+}
+
+bool AMainCharacter::IsAmmoFull()
+{
+	return CurrentAmmo >= MaxAmmo;
 }
