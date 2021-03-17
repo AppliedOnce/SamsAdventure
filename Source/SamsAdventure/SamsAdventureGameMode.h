@@ -6,12 +6,10 @@
 #include "GameFramework/GameModeBase.h"
 #include "SamsAdventureGameMode.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class SAMSADVENTURE_API ASamsAdventureGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+
+	ASamsAdventureGameMode();
 };

@@ -3,3 +3,7 @@
 
 #include "SamsAdventureGameMode.h"
 
+ASamsAdventureGameMode::ASamsAdventureGameMode()
+{
+
+}

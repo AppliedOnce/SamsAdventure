@@ -48,6 +48,7 @@ void AMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	TimeSinceLastShot += DeltaTime;
 }
 
 // Called to bind functionality to input
@@ -90,10 +91,11 @@ void AMainCharacter::Shoot()
 
 	if (SamsWorld)
 	{
-		if (CurrentAmmo > 0)
+		if (CurrentAmmo > 0 && TimeSinceLastShot >= ShootCooldown)
 		{
 			SamsWorld->SpawnActor<ABulletNut>(BulletBlueprint, GetActorLocation() + BulletSpawnPoint, GetActorRotation());
 			CurrentAmmo--;
+			TimeSinceLastShot = 0.f;
 		}
 		else
 		{
