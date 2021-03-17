@@ -30,6 +30,7 @@ protected:
 
 	UCharacterMovementComponent* movementComp;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPlayerHealth* HealthComp;
 
 	UPROPERTY(EditAnywhere, Category = "Melee");
@@ -45,11 +46,14 @@ protected:
 	void OnHit(UPrimitiveComponent* HitComponent,
 		AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
-	UPROPERTY(EditAnywhere, Category = "Projectile");
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile");
 	int CurrentAmmo{ 0 };
 
 	UPROPERTY(EditAnywhere, Category = "Projectile");
 	int MaxAmmo{ 20 };
+
+	UPROPERTY(EditAnywhere, Category = "Projectile");
+	float ShootCooldown{ 0.1f };
 
 public:
 	// Sets default values for this character's properties
@@ -65,11 +69,12 @@ public:
 	bool IsAmmoFull();
 
 private:
-
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void Shoot();
 	void Run();
 	void StopRunning();
 	void Attack();
+
+	float TimeSinceLastShot{ ShootCooldown };
 };

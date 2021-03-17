@@ -20,7 +20,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, Category = "Setup");	// Gjør dette for å kunne endre den i Unreal
-	float speed = 800.f;							//legg til .f fordi det er en float
+	float speed = 1000.f;							//legg til .f fordi det er en float
 
 	UPROPERTY(EditAnywhere, Category = "Setup");
 	float timeBeforeDestruction = 3.f;
