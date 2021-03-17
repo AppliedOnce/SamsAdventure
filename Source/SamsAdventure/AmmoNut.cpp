@@ -3,6 +3,8 @@
 
 #include "AmmoNut.h"
 #include "Components/SphereComponent.h"
+#include "MainCharacter.h"
+
 // Sets default values
 AAmmoNut::AAmmoNut()
 {
@@ -14,6 +16,7 @@ AAmmoNut::AAmmoNut()
 	
 	OurVisibleComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OurVisibleComponent"));
 	OurVisibleComponent->SetupAttachment(RootComponent);
+	OurVisibleComponent->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
 
 }
 
@@ -22,6 +25,7 @@ void AAmmoNut::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	Cast<USphereComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &AAmmoNut::OnOverlap);
 }
 
 // Called every frame
@@ -31,3 +35,22 @@ void AAmmoNut::Tick(float DeltaTime)
 
 }
 
+void AAmmoNut::OnOverlap(UPrimitiveComponent* OverlappedComponent,
+	AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor->IsA(AMainCharacter::StaticClass()))
+	{
+		AMainCharacter* player = Cast<AMainCharacter>(OtherActor);
+		if (!player->IsAmmoFull())
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Picking up %i ammo"), AmmoToGive);
+			player->IncreaseAmmo(AmmoToGive);
+			Destroy();
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Ammo is allready full, did not pick up."));
+		}
+	}
+}

@@ -21,30 +21,35 @@ protected:
 	class UCameraComponent* PlayerCamera;
 
 	UPROPERTY(EditAnywhere, Category = "Projectile");
-	TSubclassOf<class ABulletNut> BulletBlueprint;
-
-	UPROPERTY(EditAnywhere, Category = "Projectile");
 	FVector BulletSpawnPoint{ 100.f, 0.f, 0.f };
 
-	class UPlayerHealth* HealthComp;
+	//An additional collision for the attack.
+	class USphereComponent* AttackCollider = nullptr;
 
-	UCapsuleComponent* collider;
+	UCapsuleComponent* PlayerCollider;
 
 	UCharacterMovementComponent* movementComp;
 
-	UFUNCTION()
-	void OnHit(UPrimitiveComponent* HitComponent, 
-		AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	class UPlayerHealth* HealthComp;
 
 	UPROPERTY(EditAnywhere, Category = "Melee");
 	TSubclassOf<class ATailAttack> AttackBlueprint;
 
+	UPROPERTY(EditAnywhere, Category = "Projectile");
+	TSubclassOf<class ABulletNut> BulletBlueprint;
+
 	UPROPERTY(EditAnywhere, Category = "Melee");
 	FVector AttackSpawnPoint{ 0.f, 0.f, 0.f };
 
-	//An additional collision for the attack.
-	UPROPERTY(EditAnywhere, Category = "Setup");
-	class USphereComponent* Collider = nullptr;
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent,
+		AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+	UPROPERTY(EditAnywhere, Category = "Projectile");
+	int CurrentAmmo{ 0 };
+
+	UPROPERTY(EditAnywhere, Category = "Projectile");
+	int MaxAmmo{ 20 };
 
 public:
 	// Sets default values for this character's properties
@@ -56,6 +61,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void IncreaseAmmo(int value);
+	bool IsAmmoFull();
+
 private:
 
 	void MoveForward(float Value);
@@ -64,6 +72,4 @@ private:
 	void Run();
 	void StopRunning();
 	void Attack();
-
-
 };
