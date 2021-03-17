@@ -20,16 +20,15 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera");
 	class UCameraComponent* PlayerCamera;
 
-	//An additional collision for the attack.
-	UPROPERTY(EditAnywhere, Category = "Setup");
-	class USphereComponent* Collider = nullptr;
-
 	UPROPERTY(EditAnywhere, Category = "Projectile");
 	FVector BulletSpawnPoint{ 100.f, 0.f, 0.f };
 
-	UCharacterMovementComponent* movementComp;
+	//An additional collision for the attack.
+	class USphereComponent* AttackCollider = nullptr;
 
-	UCapsuleComponent* collider;
+	UCapsuleComponent* PlayerCollider;
+
+	UCharacterMovementComponent* movementComp;
 
 	class UPlayerHealth* HealthComp;
 

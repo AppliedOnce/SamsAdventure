@@ -26,11 +26,10 @@ AMainCharacter::AMainCharacter()
 	CameraArm->bInheritYaw = false;
 	CameraArm->bDoCollisionTest = false;
 
-
 	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
 	PlayerCamera->SetupAttachment(CameraArm, USpringArmComponent::SocketName);
 
-	collider = this->GetCapsuleComponent();
+	PlayerCollider = this->GetCapsuleComponent();
 	movementComp = GetCharacterMovement();
 
 	HealthComp = CreateDefaultSubobject<UPlayerHealth>(TEXT("PlayerHealth"));
@@ -41,7 +40,7 @@ void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	collider->OnComponentHit.AddDynamic(this, &AMainCharacter::OnHit);
+	PlayerCollider->OnComponentHit.AddDynamic(this, &AMainCharacter::OnHit);
 }
 
 // Called every frame
@@ -120,7 +119,7 @@ void AMainCharacter::OnHit(UPrimitiveComponent* HitComponent,
 	if (OtherActor->IsA(ABirdEnemy::StaticClass()))
 	{
 		HealthComp->LoseHp(1);
-		UE_LOG(LogTemp, Warning, TEXT("Player just hit: %s\nPlayer health: %i"), *OtherActor->GetName(), HealthComp->GetCurrentHp());
+		UE_LOG(LogTemp, Warning, TEXT("Player just hit %s, taking damage.\nPlayer health: %i"), *OtherActor->GetName(), HealthComp->GetCurrentHp());
 	}
 }
 
