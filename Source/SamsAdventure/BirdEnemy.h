@@ -19,16 +19,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-
-	UPROPERTY(EditAnywhere, Category = "Setup");
-	class USphereComponent* Collider = nullptr;
-
-
-	UFUNCTION()
-		void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-			UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex,
-			bool bFromSweep, const FHitResult& SweepResult);
-
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -36,4 +26,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void GotHit();
+private:
+	int Health{ 0 };
 };

@@ -67,3 +67,8 @@ int UPlayerHealth::GetCurrentHp()
 {
 	return CurrentHealth;
 }
+
+int UPlayerHealth::GetMaxHp()
+{
+	return MaxHealth;
+}

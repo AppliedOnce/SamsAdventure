@@ -30,7 +30,9 @@ AMainCharacter::AMainCharacter()
 	PlayerCamera->SetupAttachment(CameraArm, USpringArmComponent::SocketName);
 
 	PlayerCollider = this->GetCapsuleComponent();
-	movementComp = GetCharacterMovement();
+	MovementComp = GetCharacterMovement();
+	//MovementComp->bOrientRotationToMovement = true;
+
 
 	HealthComp = CreateDefaultSubobject<UPlayerHealth>(TEXT("PlayerHealth"));
 }
@@ -77,12 +79,12 @@ void AMainCharacter::MoveRight(float Value)
 
 void AMainCharacter::Run()
 {
-	movementComp->MaxWalkSpeed = 800.f;
+	MovementComp->MaxWalkSpeed = 800.f;
 }
 
 void AMainCharacter::StopRunning()
 {
-	movementComp->MaxWalkSpeed = 600.f;
+	MovementComp->MaxWalkSpeed = 600.f;
 }
 
 void AMainCharacter::Shoot()
@@ -135,4 +137,9 @@ void AMainCharacter::IncreaseAmmo(int value)
 bool AMainCharacter::IsAmmoFull()
 {
 	return CurrentAmmo >= MaxAmmo;
+}
+
+UPlayerHealth* AMainCharacter::GetHealthComponent()
+{
+	return HealthComp;
 }

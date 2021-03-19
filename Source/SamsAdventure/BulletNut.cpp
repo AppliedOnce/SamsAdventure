@@ -55,7 +55,7 @@ void ABulletNut::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	{
 		if (OtherActor->IsA(ABirdEnemy::StaticClass()))
 		{
-			OtherActor->Destroy();
+			Cast<ABirdEnemy>(OtherActor)->GotHit();
 			Destroy();
 		}
 
