@@ -36,8 +36,10 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	void LoseHp(int ammount);
+	UFUNCTION(BlueprintCallable)
 	void IncreaseHp(int ammount);
 	int GetCurrentHp();
+	int GetMaxHp();
 private:
 
 	float Timer{ 0.f };

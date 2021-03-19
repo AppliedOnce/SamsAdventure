@@ -47,14 +47,15 @@ void ATailAttack::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 {
 	//UE_LOG(LogTemp, Warning, TEXT("%s"), *OtherActor->GetName());
 
-	if (OtherActor->IsA(AMainCharacter::StaticClass()) || OtherActor->IsA(ABulletNut::StaticClass()))
+	// Do not destroy the bullet if it collides with the player or other bullets
+	if (!OtherActor->IsA(AMainCharacter::StaticClass()) && !OtherActor->IsA(ATailAttack::StaticClass()))
 	{
+		if (OtherActor->IsA(ABirdEnemy::StaticClass()))
+		{
+			Cast<ABirdEnemy>(OtherActor)->GotHit();
+			Destroy();
+		}
 
-	}
-	else if(OtherActor->IsA(ABirdEnemy::StaticClass()))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Hit"))
-		OtherActor->Destroy();
 		Destroy();
 	}
 }

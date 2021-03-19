@@ -28,7 +28,7 @@ protected:
 
 	UCapsuleComponent* PlayerCollider;
 
-	UCharacterMovementComponent* movementComp;
+	UCharacterMovementComponent* MovementComp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPlayerHealth* HealthComp;
@@ -67,6 +67,7 @@ public:
 
 	void IncreaseAmmo(int value);
 	bool IsAmmoFull();
+	class UPlayerHealth* GetHealthComponent();
 
 private:
 	void MoveForward(float Value);
