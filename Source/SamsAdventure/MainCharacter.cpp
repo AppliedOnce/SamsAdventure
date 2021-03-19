@@ -3,12 +3,13 @@
 #include "MainCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "BulletNut.h"
+#include "GameFramework/Controller.h"
+#include "Components/InputComponent.h"
 #include "Components/SphereComponent.h"
-#include "TailAttack.h"
 #include "Components/CapsuleComponent.h"
+#include "BulletNut.h"
+#include "TailAttack.h"
 #include "BirdEnemy.h"
 #include "PlayerHealth.h"
 
@@ -21,18 +22,22 @@ AMainCharacter::AMainCharacter()
 	CameraArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraArm"));
 	CameraArm->SetupAttachment(RootComponent);
 	CameraArm->TargetArmLength = 800.f;
-	//CameraArm->bEnableCameraLag = true;
-	CameraArm->SetRelativeRotation(FRotator(-60.0, 90.f, 0.f));
+	CameraArm->SetRelativeRotation(FRotator(-60.0, 90.f, CameraArm->GetRelativeRotation().Roll));
 	CameraArm->bInheritYaw = false;
 	CameraArm->bDoCollisionTest = false;
+
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationYaw = false;
+	bUseControllerRotationRoll = false;
 
 	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
 	PlayerCamera->SetupAttachment(CameraArm, USpringArmComponent::SocketName);
 
 	PlayerCollider = this->GetCapsuleComponent();
-	MovementComp = GetCharacterMovement();
-	//MovementComp->bOrientRotationToMovement = true;
 
+	MovementComp = GetCharacterMovement();
+	MovementComp->bOrientRotationToMovement = true;
+	MovementComp->RotationRate = FRotator(0.f, 540.f, 0.0f);
 
 	HealthComp = CreateDefaultSubobject<UPlayerHealth>(TEXT("PlayerHealth"));
 }
@@ -69,12 +74,26 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void AMainCharacter::MoveForward(float Value)
 {
-	AddMovementInput(GetActorForwardVector(), Value);
+	if (Controller != NULL)
+	{
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		AddMovementInput(Direction, Value);
+	}
 }
 
 void AMainCharacter::MoveRight(float Value)
 {
-	AddMovementInput(GetActorRightVector(), Value);
+	if (Controller != NULL)
+	{
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+		AddMovementInput(Direction, Value);
+	}
 }
 
 void AMainCharacter::Run()
@@ -95,7 +114,7 @@ void AMainCharacter::Shoot()
 	{
 		if (CurrentAmmo > 0 && TimeSinceLastShot >= ShootCooldown)
 		{
-			SamsWorld->SpawnActor<ABulletNut>(BulletBlueprint, GetActorLocation() + BulletSpawnPoint, GetActorRotation());
+			SamsWorld->SpawnActor<ABulletNut>(BulletBlueprint, GetActorLocation() + (GetActorForwardVector() * 100), GetActorRotation());
 			CurrentAmmo--;
 			TimeSinceLastShot = 0.f;
 		}

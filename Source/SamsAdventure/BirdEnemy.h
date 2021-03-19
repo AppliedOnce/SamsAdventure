@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "AmmoNut.h"
 #include "BirdEnemy.generated.h"
 
 UCLASS()
@@ -27,6 +28,15 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void GotHit();
+
+	UPROPERTY(EditAnywhere, Category = "Setup");
+	TSubclassOf<AActor> PowerupBlueprint;
+
+	UPROPERTY(EditAnywhere, Category = "Setup");
+	TArray<TSubclassOf<AActor>> PowerupArray;
+
 private:
 	int Health{ 0 };
+
+	void SpawnPowerups();
 };
