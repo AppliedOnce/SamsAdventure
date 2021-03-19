@@ -5,6 +5,7 @@
 #include "MainCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SphereComponent.h"
+#include "AmmoNut.h"
 
 // Sets default values
 ABirdEnemy::ABirdEnemy()
@@ -38,6 +39,29 @@ void ABirdEnemy::GotHit()
 	Health--;
 	if (Health <= 0)
 	{
+		SpawnPowerups();
 		Destroy();
+	}
+}
+
+void ABirdEnemy::SpawnPowerups()
+{
+	UWorld* World = GetWorld();
+	int RandomNumber = FMath::RandRange(0, 20 * (PowerupArray.Num() + 1));
+
+	if (World)
+	{
+		for (int i = 0; i < PowerupArray.Num(); i++)
+		{
+			if (RandomNumber >= (20 * PowerupArray.Num() / PowerupArray.Num()) * (i + 1))
+			{
+				PowerupBlueprint = PowerupArray[i];
+			}
+		}
+
+		if (PowerupBlueprint != NULL)
+		{
+			World->SpawnActor<AAmmoNut>(PowerupBlueprint, GetActorLocation(), GetActorRotation());
+		}
 	}
 }
