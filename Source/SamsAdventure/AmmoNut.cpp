@@ -41,11 +41,11 @@ void AAmmoNut::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 {
 	if (OtherActor->IsA(AMainCharacter::StaticClass()))
 	{
-		AMainCharacter* player = Cast<AMainCharacter>(OtherActor);
-		if (!player->IsAmmoFull())
+		AMainCharacter* Player = Cast<AMainCharacter>(OtherActor);
+		if (!Player->IsAmmoFull())
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Picking up %i ammo"), AmmoToGive);
-			player->IncreaseAmmo(AmmoToGive);
+			Player->IncreaseAmmo(AmmoToGive);
 			Destroy();
 		}
 		else

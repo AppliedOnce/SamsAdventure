@@ -32,16 +32,16 @@ void ABulletNut::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);						//Det under gjør at prosjektilen går framover
 	
-	timeSurvived += DeltaTime;
+	TimeSurvived += DeltaTime;
 
-	if (timeSurvived > timeBeforeDestruction)
+	if (TimeSurvived > TimeBeforeDestruction)
 	{
 		this->Destroy();
 	}
 	else
 	{
 		FVector NewLocation = GetActorLocation();
-		NewLocation += GetActorForwardVector() * speed * DeltaTime;
+		NewLocation += GetActorForwardVector() * Speed * DeltaTime;
 		SetActorLocation(NewLocation, false);
 	}
 }

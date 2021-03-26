@@ -33,9 +33,9 @@ void ATailAttack::BeginPlay()
 void ATailAttack::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	timeSurvived += DeltaTime;
+	TimeSurvived += DeltaTime;
 
-	if (timeSurvived > timeBeforeDestruction)
+	if (TimeSurvived > TimeBeforeDestruction)
 	{
 		this->Destroy();
 	}
