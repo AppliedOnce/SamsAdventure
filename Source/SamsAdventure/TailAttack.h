@@ -20,9 +20,9 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, Category = "Setup");
-	float timeBeforeDestruction = 1.f;
+	float TimeBeforeDestruction = 1.f;
 
-	float timeSurvived = 0.f;
+	float TimeSurvived = 0.f;
 
 	UPROPERTY(EditAnywhere, Category = "Setup");
 	class USphereComponent* Collider = nullptr;

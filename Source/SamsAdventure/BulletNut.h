@@ -20,12 +20,12 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, Category = "Setup");	// Gjør dette for å kunne endre den i Unreal
-	float speed = 1000.f;							//legg til .f fordi det er en float
+	float Speed = 1000.f;							//legg til .f fordi det er en float
 
 	UPROPERTY(EditAnywhere, Category = "Setup");
-	float timeBeforeDestruction = 3.f;
+	float TimeBeforeDestruction = 3.f;
 
-	float timeSurvived = 0.f;
+	float TimeSurvived = 0.f;
 
 	UPROPERTY(EditAnywhere, Category = "Setup");
 	class USphereComponent* Collider = nullptr;

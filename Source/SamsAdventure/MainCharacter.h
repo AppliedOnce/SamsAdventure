@@ -65,9 +65,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void IncreaseAmmo(int value);
-	bool IsAmmoFull();
-	class UPlayerHealth* GetHealthComponent();
+	void IncreaseAmmo(int Value);
+	bool IsAmmoFull() const;
+	class UPlayerHealth* GetHealthComponent() const;
 
 private:
 	void MoveForward(float Value);
