@@ -2,8 +2,3 @@
 
 
 #include "Boss.h"
-
-ABoss::ABoss()
-{
-	PrimaryActorTick.bCanEverTick = true;
-}
