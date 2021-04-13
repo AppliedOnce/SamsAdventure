@@ -5,7 +5,7 @@
 #include "Components/SphereComponent.h"
 #include "MainCharacter.h"
 #include "BirdEnemy.h"
-
+#include "BirdWarrior.h"
 // Sets default values
 ABulletNut::ABulletNut()
 {
@@ -58,6 +58,7 @@ void ABulletNut::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 			Cast<ABirdEnemy>(OtherActor)->GotHit();
 			Destroy();
 		}
+	
 
 		Destroy();
 	}

@@ -4,8 +4,11 @@
 #include "BirdHunter.h"
 #include "Components/SphereComponent.h"
 #include "MainCharacter.h"
+<<<<<<< Updated upstream
 #include "EnemyBullet.h"
 
+=======
+>>>>>>> Stashed changes
 
 ABirdHunter::ABirdHunter()
 {
@@ -21,6 +24,7 @@ ABirdHunter::ABirdHunter()
 	OK->SetupAttachment(RootComponent);
 }
 
+<<<<<<< Updated upstream
 void ABirdHunter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -28,10 +32,13 @@ void ABirdHunter::BeginPlay()
 	Cast<USphereComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &ABirdHunter::OnOverlap);
 }
 
+=======
+>>>>>>> Stashed changes
 void ABirdHunter::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+<<<<<<< Updated upstream
 	UWorld* SamsWorld = GetWorld();
 
 	// Do not destroy the bullet if it collides with the player or other bullets
@@ -44,5 +51,11 @@ void ABirdHunter::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 		{
 			SamsWorld->SpawnActor<AEnemyBullet>(AttackBlueprint, GetActorLocation() + AttackSpawnPoint, GetActorRotation());
 		}
+=======
+	// Do not destroy the bullet if it collides with the player or other bullets
+	if (OtherActor->IsA(AMainCharacter::StaticClass()))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("In Range"))
+>>>>>>> Stashed changes
 	}
 }
