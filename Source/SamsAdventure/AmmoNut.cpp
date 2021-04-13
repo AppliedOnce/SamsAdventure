@@ -17,7 +17,6 @@ AAmmoNut::AAmmoNut()
 	OurVisibleComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OurVisibleComponent"));
 	OurVisibleComponent->SetupAttachment(RootComponent);
 	OurVisibleComponent->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
-
 }
 
 // Called when the game starts or when spawned
@@ -33,6 +32,14 @@ void AAmmoNut::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	Rotate();
+}
+
+void AAmmoNut::Rotate()
+{
+	FQuat QuatRotation = FQuat(FRotator(PitchValue, YawValue, RollValue));
+
+	AddActorLocalRotation(QuatRotation, false, 0, ETeleportType::None);
 }
 
 void AAmmoNut::OnOverlap(UPrimitiveComponent* OverlappedComponent,

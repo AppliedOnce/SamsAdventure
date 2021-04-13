@@ -35,5 +35,13 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+private:
+	UPROPERTY(EditAnywhere, Category = "Rotation");
+	float PitchValue{ 0.f };
+	UPROPERTY(EditAnywhere, Category = "Rotation");
+	float YawValue{ 0.f };
+	UPROPERTY(EditAnywhere, Category = "Rotation");
+	float RollValue{ 0.f };
+	void Rotate();
 
 };
