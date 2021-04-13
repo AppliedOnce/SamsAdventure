@@ -17,11 +17,8 @@ class SAMSADVENTURE_API ABirdHunter : public ABirdEnemy
 public:
 	ABirdHunter();
 
-<<<<<<< Updated upstream
 	virtual void BeginPlay() override;
 
-=======
->>>>>>> Stashed changes
 
 	UPROPERTY(EditAnywhere, Category = "Setup");
 	class USphereComponent* Collider = nullptr;
@@ -29,7 +26,6 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Setup");
 	class UStaticMeshComponent* OK = nullptr;
 
-<<<<<<< Updated upstream
 	UPROPERTY(EditAnywhere, Category = "Melee");
 	FVector AttackSpawnPoint{ 0.f, 0.f, 0.f };
 
@@ -37,8 +33,7 @@ public:
 	TSubclassOf<class ATailAttack> AttackBlueprint;
 
 
-=======
->>>>>>> Stashed changes
+
 
 protected:
 	

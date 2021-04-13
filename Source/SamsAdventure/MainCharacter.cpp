@@ -75,7 +75,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void AMainCharacter::MoveForward(float Value)
 {
-	if (Controller != NULL)
+	if (Controller != nullptr)
 	{
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
@@ -87,7 +87,7 @@ void AMainCharacter::MoveForward(float Value)
 
 void AMainCharacter::MoveRight(float Value)
 {
-	if (Controller != NULL)
+	if (Controller != nullptr)
 	{
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
@@ -147,19 +147,19 @@ void AMainCharacter::OnHit(UPrimitiveComponent* HitComponent,
 	}
 }
 
-void AMainCharacter::IncreaseAmmo(int value)
+void AMainCharacter::IncreaseAmmo(int Value)
 {
-	CurrentAmmo += value;
+	CurrentAmmo += Value;
 	if (CurrentAmmo > MaxAmmo)
 		CurrentAmmo = MaxAmmo;
 }
 
-bool AMainCharacter::IsAmmoFull()
+bool AMainCharacter::IsAmmoFull() const
 {
 	return CurrentAmmo >= MaxAmmo;
 }
 
-UPlayerHealth* AMainCharacter::GetHealthComponent()
+UPlayerHealth* AMainCharacter::GetHealthComponent() const
 {
 	return HealthComp;
 }
