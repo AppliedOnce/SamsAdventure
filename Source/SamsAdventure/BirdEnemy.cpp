@@ -47,7 +47,7 @@ void ABirdEnemy::GotHit()
 void ABirdEnemy::SpawnPowerups()
 {
 	UWorld* World = GetWorld();
-	int RandomNumber = FMath::RandRange(0, 20 * (PowerupArray.Num() + 1));
+	const int RandomNumber = FMath::RandRange(0, 20 * (PowerupArray.Num() + 1));
 
 	if (World)
 	{
