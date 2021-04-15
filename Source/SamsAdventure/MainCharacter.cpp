@@ -163,3 +163,8 @@ UPlayerHealth* AMainCharacter::GetHealthComponent() const
 {
 	return HealthComp;
 }
+
+bool AMainCharacter::IsInvulnerable()
+{
+	return Invulnerable;
+}
