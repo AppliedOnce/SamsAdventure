@@ -12,6 +12,7 @@
 #include "TailAttack.h"
 #include "BirdEnemy.h"
 #include "PlayerHealth.h"
+#include "BirdWarrior.h"
 
 // Sets default values
 AMainCharacter::AMainCharacter()
