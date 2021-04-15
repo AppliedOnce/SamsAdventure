@@ -19,7 +19,6 @@ public:
 
 	virtual void BeginPlay() override;
 
-
 	UPROPERTY(EditAnywhere, Category = "Setup");
 	class USphereComponent* Collider = nullptr;
 
@@ -31,10 +30,6 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Melee");
 	TSubclassOf<class ATailAttack> AttackBlueprint;
-
-
-
-
 protected:
 	
 

@@ -4,22 +4,12 @@
 #include "BirdAIController.h"
 #include "Kismet/GameplayStatics.h"
 
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
 void ABirdAIController::BeginPlay()
 {
 	Super::BeginPlay();
 	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 
 	SetFocus(PlayerPawn);
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
 }
 
 void ABirdAIController::Tick(float DeltaTime)
@@ -29,9 +19,4 @@ void ABirdAIController::Tick(float DeltaTime)
 	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 
 	MoveToActor(PlayerPawn, 0);
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
 }
