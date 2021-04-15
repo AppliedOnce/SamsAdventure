@@ -4,16 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
-#include "BirdAIController.generated.h"
+#include "AIShooting.generated.h"
 
+/**
+ * 
+ */
 UCLASS()
-class SAMSADVENTURE_API ABirdAIController : public AAIController
+class SAMSADVENTURE_API AAIShooting : public AAIController
 {
 	GENERATED_BODY()
-public:
 	virtual void BeginPlay() override;
-protected:
-	// Called when the game starts or when spawned
+
+	UPROPERTY(EditAnywhere, Category = "Bullet");
+	TSubclassOf<class AEnemyBullet> AttackBlueprint;
+
 
 	virtual void Tick(float DeltaTime) override;
 

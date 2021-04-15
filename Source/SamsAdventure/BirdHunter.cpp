@@ -5,7 +5,6 @@
 #include "Components/SphereComponent.h"
 #include "MainCharacter.h"
 #include "EnemyBullet.h"
-#include "TailAttack.h"
 
 
 ABirdHunter::ABirdHunter()
@@ -32,20 +31,18 @@ void ABirdHunter::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	// Do not destroy the bullet if it collides with the player or other bullets
 	UWorld* SamsWorld = GetWorld();
 
-	// Do not destroy the bullet if it collides with the player or other bullets
-	if (OtherActor->IsA(AMainCharacter::StaticClass()))
-	{
-		if (SamsWorld)
-		{
-			SamsWorld->SpawnActor<AEnemyBullet>(AttackBlueprint, GetActorLocation() + AttackSpawnPoint, GetActorRotation());
-		}
-
-		// Do not destroy the bullet if it collides with the player or other bullets
 		if (OtherActor->IsA(AMainCharacter::StaticClass()))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("In Range"))
+			UE_LOG(LogTemp, Warning, TEXT("Attack"));
+			if (SamsWorld)
+			{
+				SamsWorld->SpawnActor<AEnemyBullet>(AttackBlueprint, GetActorLocation(), GetActorRotation());
+			}
 		}
-	}
+
 }
+
+
