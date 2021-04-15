@@ -26,12 +26,16 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Setup");
 	class UStaticMeshComponent* OK = nullptr;
 
-	UPROPERTY(EditAnywhere, Category = "Melee");
+	UPROPERTY(EditAnywhere, Category = "Projectile");
 	FVector AttackSpawnPoint{ 0.f, 0.f, 0.f };
 
-	UPROPERTY(EditAnywhere, Category = "Melee");
-	TSubclassOf<class ATailAttack> AttackBlueprint;
+	UPROPERTY(EditAnywhere, Category = "Projectile");
+	TSubclassOf<class AEnemyBullet> AttackBlueprint;
 
+	UFUNCTION()
+		void OnOverlap(UPrimitiveComponent* OverlappedComponent,
+			AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 
 
@@ -40,10 +44,6 @@ protected:
 
 public:
 
-	UFUNCTION()
-		void OnOverlap(UPrimitiveComponent* OverlappedComponent,
-			AActor* OtherActor, UPrimitiveComponent* OtherComponent,
-			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	
 };
