@@ -68,6 +68,7 @@ public:
 	void IncreaseAmmo(int Value);
 	bool IsAmmoFull() const;
 	class UPlayerHealth* GetHealthComponent() const;
+	bool IsInvulnerable();
 
 private:
 	void MoveForward(float Value);
@@ -77,5 +78,6 @@ private:
 	void StopRunning();
 	void Attack();
 
+	bool Invulnerable{ false };
 	float TimeSinceLastShot{ ShootCooldown };
 };
