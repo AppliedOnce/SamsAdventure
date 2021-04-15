@@ -4,16 +4,12 @@
 #include "BirdAIController.h"
 #include "Kismet/GameplayStatics.h"
 
-
-
 void ABirdAIController::BeginPlay()
 {
 	Super::BeginPlay();
 	/*APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 
 	SetFocus(PlayerPawn);*/
-
-
 }
 
 void ABirdAIController::Tick(float DeltaTime)
