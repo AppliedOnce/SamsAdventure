@@ -19,7 +19,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+	UPROPERTY(EditAnywhere, Category = "Setup");
+	class UStaticMeshComponent* Collider{ nullptr };
+
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
