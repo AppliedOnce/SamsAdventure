@@ -34,15 +34,14 @@ void ABirdHunter::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	// Do not destroy the bullet if it collides with the player or other bullets
 	UWorld* SamsWorld = GetWorld();
 
-		if (OtherActor->IsA(AMainCharacter::StaticClass()))
+	if (OtherActor->IsA(AMainCharacter::StaticClass()))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Attack"));
+		if (SamsWorld)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Attack"));
-			if (SamsWorld)
-			{
-				SamsWorld->SpawnActor<AEnemyBullet>(AttackBlueprint, GetActorLocation(), GetActorRotation());
-			}
+			SamsWorld->SpawnActor<AEnemyBullet>(AttackBlueprint, GetActorLocation(), GetActorRotation());
 		}
-
+	}
 }
 
 
