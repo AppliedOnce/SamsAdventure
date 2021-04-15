@@ -20,7 +20,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, Category = "Setup");
-	class UStaticMeshComponent* Collider{ nullptr };
+	class USphereComponent* Collider{ nullptr };
 
 public:
 	// Called every frame
