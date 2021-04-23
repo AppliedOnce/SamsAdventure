@@ -25,7 +25,7 @@ void AEnemyBullet::BeginPlay()
 {
 	Super::BeginPlay();
 	Cast<USphereComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &AEnemyBullet::OnOverlap);
-
+	
 }
 
 // Called every frame
@@ -56,7 +56,7 @@ void AEnemyBullet::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	
 		if (OtherActor->IsA(AMainCharacter::StaticClass()))
 		{
-			//OtherActor->GetHealthComponent()->LoseHp(1);
+			Cast<AMainCharacter>(OtherActor)->GetHealthComponent()->LoseHp(1);
 			Destroy();
 		}
 

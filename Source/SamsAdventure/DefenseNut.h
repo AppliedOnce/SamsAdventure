@@ -22,6 +22,14 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Setup");
 	class USphereComponent* Collider{ nullptr };
 
+	UPROPERTY(EditAnywhere, Category = "Setup");
+	class UStaticMeshComponent* OurVisibleComponent{ nullptr };
+
+	UFUNCTION()
+		void OnOverlap(UPrimitiveComponent* OverlappedComponent,
+			AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

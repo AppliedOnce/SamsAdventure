@@ -61,7 +61,7 @@ void ABirdEnemy::SpawnPowerups()
 
 		if (PowerupBlueprint != NULL)
 		{
-			World->SpawnActor<AAmmoNut>(PowerupBlueprint, GetActorLocation(), GetActorRotation());
+			World->SpawnActor<AActor>(PowerupBlueprint, GetActorLocation(), GetActorRotation());
 		}
 	}
 }

@@ -23,6 +23,16 @@ void UPlayerHealth::BeginPlay()
 	
 }
 
+void UPlayerHealth::ShieldPlayer()
+{
+	bIsShielded = true;
+}
+
+bool UPlayerHealth::CheckShielded()
+{
+	return bIsShielded;
+}
+
 
 // Called every frame
 void UPlayerHealth::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -46,12 +56,21 @@ void UPlayerHealth::LoseHp(int Amount)
 {
 	if (!bIsInvulnerable)
 	{
-		if (CurrentHealth <= 0)
-			CurrentHealth = 0;
+		if (bIsShielded)
+		{
+			bIsShielded = false;
+			bIsInvulnerable = true;
+			return;
+		}
 		else
-			CurrentHealth -= Amount;
+		{
+			if (CurrentHealth <= 0)
+				CurrentHealth = 0;
+			else
+				CurrentHealth -= Amount;
 
-		bIsInvulnerable = true;
+			bIsInvulnerable = true;
+		}
 	}
 }
 
