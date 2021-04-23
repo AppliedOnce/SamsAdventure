@@ -67,6 +67,8 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("Forward", this, &AMainCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("Right", this, &AMainCharacter::MoveRight);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction("Glide", IE_Pressed, this, &AMainCharacter::Glide);
+	PlayerInputComponent->BindAction("Glide", IE_Released, this, &AMainCharacter::StopGliding);
 	PlayerInputComponent->BindAction("Shoot", IE_Pressed, this, &AMainCharacter::Shoot);
 	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AMainCharacter::Attack);
 	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &AMainCharacter::Run);
@@ -167,4 +169,22 @@ UPlayerHealth* AMainCharacter::GetHealthComponent() const
 bool AMainCharacter::IsInvulnerable()
 {
 	return Invulnerable;
+}
+
+void AMainCharacter::Glide()
+{
+	if (MovementComp->IsFalling())
+	{
+		MovementComp->GravityScale = 0.2f;
+		MovementComp->AirControl = 0.3f;
+	}
+}
+
+void AMainCharacter::StopGliding()
+{
+	if (MovementComp->IsFalling())
+	{
+		MovementComp->GravityScale = 1.0f;
+		MovementComp->AirControl = 1.0f;
+	}
 }
