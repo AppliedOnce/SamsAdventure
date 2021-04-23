@@ -5,7 +5,7 @@
 #include "Components/SphereComponent.h"
 #include "MainCharacter.h"
 #include "BirdEnemy.h"
-#include "BirdWarrior.h"
+
 // Sets default values
 ABulletNut::ABulletNut()
 {

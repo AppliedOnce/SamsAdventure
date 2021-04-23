@@ -77,6 +77,8 @@ private:
 	void Run();
 	void StopRunning();
 	void Attack();
+	void Glide();
+	void StopGliding();
 
 	bool Invulnerable{ false };
 	float TimeSinceLastShot{ ShootCooldown };

@@ -31,3 +31,13 @@ void ASamsAdventureGameMode::Tick(float DeltaTime)
 		}
 	}
 }
+
+void ASamsAdventureGameMode::TeleportPlayerToStart()
+{
+	PlayerCharacter->SetActorLocation(Checkpoint);
+}
+
+void ASamsAdventureGameMode::SetCheckpoint(FVector NewCheckpoint)
+{
+	Checkpoint = NewCheckpoint;
+}
