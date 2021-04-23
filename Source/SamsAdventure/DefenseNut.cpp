@@ -3,6 +3,8 @@
 
 #include "DefenseNut.h"
 #include "Components/SphereComponent.h"
+#include "MainCharacter.h"
+#include "PlayerHealth.h"
 
 // Sets default values
 ADefenseNut::ADefenseNut()
@@ -12,13 +14,18 @@ ADefenseNut::ADefenseNut()
 
 	Collider = CreateDefaultSubobject<USphereComponent>(TEXT("Collider"));
 	RootComponent = Collider;
+
+	OurVisibleComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OurVisibleComponent"));
+	OurVisibleComponent->SetupAttachment(RootComponent);
+	OurVisibleComponent->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
 }
 
 // Called when the game starts or when spawned
 void ADefenseNut::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	Cast<USphereComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &ADefenseNut::OnOverlap);
 }
 
 // Called every frame
@@ -26,5 +33,22 @@ void ADefenseNut::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ADefenseNut::OnOverlap(UPrimitiveComponent* OverlappedComponent,
+	AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor->IsA(AMainCharacter::StaticClass()))
+	{
+		AMainCharacter* Player = Cast<AMainCharacter>(OtherActor);
+
+		if (!Player->GetHealthComponent()->CheckShielded())
+		{
+			Player->GetHealthComponent()->ShieldPlayer();
+			Destroy();
+		}
+		
+	}
 }
 

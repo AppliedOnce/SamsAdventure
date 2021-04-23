@@ -29,8 +29,11 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Invulnerability");
 	float InvulnerableSeconds{ 1.f };
 
-	UPROPERTY(VisibleAnywhere, Category = "Health");
+	UPROPERTY(VisibleAnywhere, Category = "Invulnerability");
 	bool bIsInvulnerable{ false };
+
+	UPROPERTY(VisibleAnywhere, Category = "Invulnerability");
+	bool bIsShielded{ false };
 
 public:	
 	// Called every frame
@@ -40,6 +43,8 @@ public:
 	void IncreaseHp(int Amount);
 	int GetCurrentHp() const;
 	int GetMaxHp() const;
+	void ShieldPlayer();
+	bool CheckShielded();
 private:
 
 	float Timer{ 0.f };
