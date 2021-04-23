@@ -25,10 +25,10 @@ void ABirdAIController::Tick(float DeltaTime)
 		MoveToActor(PlayerPawn, 0);
 
 	}
-	else 
-	{
+	/*else*/ 
+	/*{
 	ClearFocus(EAIFocusPriority::Gameplay);
 	StopMovement();
-	}
+	}*/
 
 }
