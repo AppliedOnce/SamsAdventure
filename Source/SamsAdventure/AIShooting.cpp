@@ -11,9 +11,9 @@
 void AAIShooting::BeginPlay()
 {
 	Super::BeginPlay();
-	/*APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 
-	SetFocus(PlayerPawn);*/
+	SetFocus(PlayerPawn);
 
 
 }
@@ -22,22 +22,8 @@ void AAIShooting::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 
 
-	if (LineOfSightTo(PlayerPawn))
-	{
-
-		MoveToActor(PlayerPawn, 0);
-		UWorld* SamsWorld = GetWorld();
-
-
-
-	}
-	else
-	{
-		ClearFocus(EAIFocusPriority::Gameplay);
-		StopMovement();
-	}
+	
 
 }

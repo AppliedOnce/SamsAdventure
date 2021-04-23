@@ -5,6 +5,7 @@
 #include "Components/SphereComponent.h"
 #include "MainCharacter.h"
 #include "EnemyBullet.h"
+#include "AIController.h"
 
 
 ABirdHunter::ABirdHunter()
@@ -12,19 +13,25 @@ ABirdHunter::ABirdHunter()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	Collider = CreateDefaultSubobject<USphereComponent>(TEXT("Collider"));
-	RootComponent = Collider;
-	Collider->SetGenerateOverlapEvents(true);
 
-	OK = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
-	OK->SetupAttachment(RootComponent);
+	PlayerSensingSphere = CreateDefaultSubobject<USphereComponent>(TEXT("VISION"));
+	PlayerSensingSphere->SetupAttachment(GetRootComponent());
+	PlayerSensingSphere->InitSphereRadius(650.f);
 }
 
 void ABirdHunter::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	Cast<USphereComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &ABirdHunter::OnOverlap);
+	PlayerSensingSphere->OnComponentBeginOverlap.AddDynamic(this, &ABirdHunter::OnOverlap);
+	PlayerSensingSphere->OnComponentEndOverlap.AddDynamic(this, &ABirdHunter::OnOverlapEnd);
+}
+
+void ABirdHunter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);	
+	ShootingRythm += DeltaTime;
+	Shooting();
 }
 
 void ABirdHunter::OnOverlap(UPrimitiveComponent* OverlappedComponent,
@@ -32,16 +39,41 @@ void ABirdHunter::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	// Do not destroy the bullet if it collides with the player or other bullets
-	UWorld* SamsWorld = GetWorld();
 
 	if (OtherActor->IsA(AMainCharacter::StaticClass()))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Attack"));
-		if (SamsWorld)
-		{
-			SamsWorld->SpawnActor<AEnemyBullet>(AttackBlueprint, GetActorLocation(), GetActorRotation());
-		}
+		InRange = true;
+		
+		
 	}
 }
 
+void ABirdHunter::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent,
+	AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+	int32 OtherBodyIndex)
+{
+	if (OtherActor->IsA(AMainCharacter::StaticClass()))
+	{
+		InRange = false;
+
+
+	}
+
+}
+
+void ABirdHunter::Shooting() {
+	UWorld* SamsWorld = GetWorld();
+
+	if (InRange != false) {
+		if (ShootingRythm >= 1) {
+			UE_LOG(LogTemp, Warning, TEXT("Attack"));
+			if (SamsWorld)
+			{
+				SamsWorld->SpawnActor<AEnemyBullet>(AttackBlueprint, GetActorLocation(), GetActorRotation());
+			}
+			ShootingRythm = 0;
+		}
+	}
+
+}
 

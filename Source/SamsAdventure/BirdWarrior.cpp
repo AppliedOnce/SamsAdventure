@@ -13,6 +13,9 @@ ABirdWarrior::ABirdWarrior()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	PlayerSensingSphere = CreateDefaultSubobject<USphereComponent> (TEXT("VISION"));
+	PlayerSensingSphere->SetupAttachment(GetRootComponent());
+	PlayerSensingSphere->InitSphereRadius(650.f);
 
 }
 
@@ -20,7 +23,7 @@ ABirdWarrior::ABirdWarrior()
 void ABirdWarrior::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	Cast<USphereComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &ABirdWarrior::OnOverlap);
 	
 }
 
@@ -68,5 +71,20 @@ void ABirdWarrior::SpawnPowerups()
 		{
 			World->SpawnActor<AAmmoNut>(PowerupBlueprint, GetActorLocation(), GetActorRotation());
 		}
+	}
+}
+
+void ABirdWarrior::OnOverlap(UPrimitiveComponent* OverlappedComponent,
+	AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	// Do not destroy the bullet if it collides with the player or other bullets
+
+	if (OtherActor->IsA(AMainCharacter::StaticClass()))
+	{
+		/*InRange = true;*/
+		/*Shooting();*/
+		UE_LOG(LogTemp, Warning, TEXT("Attack"));
+
 	}
 }
