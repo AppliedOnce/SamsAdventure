@@ -23,14 +23,14 @@ ABulletNut::ABulletNut()
 void ABulletNut::BeginPlay()
 {
 	Super::BeginPlay();
-								//Denne gjør at den kjører
+								//Denne gjï¿½r at den kjï¿½rer
 	Cast<USphereComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &ABulletNut::OnOverlap);
 }
 
 // Called every frame
 void ABulletNut::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);						//Det under gjør at prosjektilen går framover
+	Super::Tick(DeltaTime);						//Det under gjï¿½r at prosjektilen gï¿½r framover
 	
 	TimeSurvived += DeltaTime;
 
@@ -45,7 +45,7 @@ void ABulletNut::Tick(float DeltaTime)
 		SetActorLocation(NewLocation, false);
 	}
 }
-												//Dette gjør sånn at når prosjektilen treffer noe, så skjer noe. den calles når den treffer noe
+												//Dette gjï¿½r sï¿½nn at nï¿½r prosjektilen treffer noe, sï¿½ skjer noe. den calles nï¿½r den treffer noe
 void ABulletNut::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -59,5 +59,6 @@ void ABulletNut::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 			Destroy();
 		}
 
+		Destroy();
 	}
 }
