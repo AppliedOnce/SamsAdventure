@@ -14,6 +14,9 @@
 #include "PlayerHealth.h"
 #include "BirdWarrior.h"
 
+#include "EnemyBullet.h"
+
+
 // Sets default values
 AMainCharacter::AMainCharacter()
 {

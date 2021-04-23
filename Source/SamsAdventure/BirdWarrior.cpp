@@ -17,13 +17,16 @@ ABirdWarrior::ABirdWarrior()
 	PlayerSensingSphere->SetupAttachment(GetRootComponent());
 	PlayerSensingSphere->InitSphereRadius(650.f);
 
+
 }
 
 // Called when the game starts or when spawned
 void ABirdWarrior::BeginPlay()
 {
 	Super::BeginPlay();
+
 	Cast<USphereComponent>(RootComponent)->OnComponentBeginOverlap.AddDynamic(this, &ABirdWarrior::OnOverlap);
+
 	
 }
 
@@ -74,6 +77,7 @@ void ABirdWarrior::SpawnPowerups()
 	}
 }
 
+
 void ABirdWarrior::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -82,8 +86,7 @@ void ABirdWarrior::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 
 	if (OtherActor->IsA(AMainCharacter::StaticClass()))
 	{
-		/*InRange = true;*/
-		/*Shooting();*/
+		
 		UE_LOG(LogTemp, Warning, TEXT("Attack"));
 
 	}
