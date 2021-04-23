@@ -21,14 +21,10 @@ public:
 
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, Category = "Setup");
-	class USphereComponent* OK = nullptr;
-	
 	UPROPERTY(VisibleAnywhere, Category = "AI")
 		class USphereComponent* PlayerSensingSphere{ nullptr };
 
-	/*UPROPERTY(EditAnywhere, Category = "Setup");
-	class UStaticMeshComponent* OK = nullptr;*/
+
 
 	UPROPERTY(EditAnywhere, Category = "Projectile");
 	FVector AttackSpawnPoint{ 0.f, 0.f, 0.f };
@@ -39,6 +35,15 @@ public:
 	float ShootingRythm{ 0.f };
 
 	bool InRange = false;
+
+
+
+
+
+protected:
+	
+public:
+
 
 	UFUNCTION()
 		void OnOverlap(UPrimitiveComponent* OverlappedComponent,
@@ -51,4 +56,5 @@ public:
 			int32 OtherBodyIndex);
 
 	void Shooting();
+
 };

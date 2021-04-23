@@ -32,6 +32,7 @@ void ABirdHunter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);	
 	ShootingRythm += DeltaTime;
 	Shooting();
+
 }
 
 void ABirdHunter::OnOverlap(UPrimitiveComponent* OverlappedComponent,
@@ -69,7 +70,7 @@ void ABirdHunter::Shooting() {
 			UE_LOG(LogTemp, Warning, TEXT("Attack"));
 			if (SamsWorld)
 			{
-				SamsWorld->SpawnActor<AEnemyBullet>(AttackBlueprint, GetActorLocation(), GetActorRotation());
+				SamsWorld->SpawnActor<AEnemyBullet>(AttackBlueprint, GetActorLocation() + AttackSpawnPoint, GetActorRotation());
 			}
 			ShootingRythm = 0;
 		}
