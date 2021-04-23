@@ -20,6 +20,8 @@ public:
 
 	class AMainCharacter* PlayerCharacter;
 	class UPlayerHealth* PlayerHealthComp;
+	void TeleportPlayerToStart();
+	void SetCheckpoint(FVector NewCheckpoint);
 
 	virtual void Tick(float DeltaTime) override;
 };

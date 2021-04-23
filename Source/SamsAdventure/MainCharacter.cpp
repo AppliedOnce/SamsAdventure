@@ -12,8 +12,6 @@
 #include "TailAttack.h"
 #include "BirdEnemy.h"
 #include "PlayerHealth.h"
-#include "BirdWarrior.h"
-
 #include "EnemyBullet.h"
 
 
