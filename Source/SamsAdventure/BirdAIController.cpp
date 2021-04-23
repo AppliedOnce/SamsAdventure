@@ -4,12 +4,16 @@
 #include "BirdAIController.h"
 #include "Kismet/GameplayStatics.h"
 
+
+
 void ABirdAIController::BeginPlay()
 {
 	Super::BeginPlay();
-	/*APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 
-	SetFocus(PlayerPawn);*/
+	SetFocus(PlayerPawn);
+
+
 }
 
 void ABirdAIController::Tick(float DeltaTime)
@@ -25,10 +29,6 @@ void ABirdAIController::Tick(float DeltaTime)
 		MoveToActor(PlayerPawn, 0);
 
 	}
-	/*else*/ 
-	/*{
-	ClearFocus(EAIFocusPriority::Gameplay);
-	StopMovement();
-	}*/
+
 
 }

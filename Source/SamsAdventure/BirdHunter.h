@@ -17,18 +17,16 @@ class SAMSADVENTURE_API ABirdHunter : public ABirdEnemy
 public:
 	ABirdHunter();
 
+
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, Category = "Setup");
-	class USphereComponent* OK = nullptr;
-	
+
 	UPROPERTY(VisibleAnywhere, Category = "AI")
 		class USphereComponent* PlayerSensingSphere{ nullptr };
 
-	/*UPROPERTY(EditAnywhere, Category = "Setup");
-	class UStaticMeshComponent* OK = nullptr;*/
+
 
 	UPROPERTY(EditAnywhere, Category = "Projectile");
 	FVector AttackSpawnPoint{ 0.f, 0.f, 0.f };
@@ -40,10 +38,21 @@ public:
 
 	bool InRange = false;
 
+
+
+
+
+protected:
+	
+
+public:
+
+
 	UFUNCTION()
 		void OnOverlap(UPrimitiveComponent* OverlappedComponent,
 			AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 
 	UFUNCTION()
 		void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent,
@@ -51,4 +60,5 @@ public:
 			int32 OtherBodyIndex);
 
 	void Shooting();
+
 };
