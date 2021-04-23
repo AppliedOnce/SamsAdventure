@@ -21,6 +21,8 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
+	UPROPERTY(VisibleAnywhere, Category = "AI")
+		class USphereComponent* PlayerSensingSphere{ nullptr };
 
 	UPROPERTY(EditAnywhere, Category = "Setup");
 	TSubclassOf<AActor> PowerupBlueprint;
@@ -35,6 +37,13 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void GotHit();
+
+	UFUNCTION()
+		void OnOverlap(UPrimitiveComponent* OverlappedComponent,
+			AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	
+	
 
 private:
 	int Health{ 0 };
