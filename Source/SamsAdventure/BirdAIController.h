@@ -6,6 +6,8 @@
 #include "AIController.h"
 #include "BirdAIController.generated.h"
 
+
+ 
 UCLASS()
 class SAMSADVENTURE_API ABirdAIController : public AAIController
 {
@@ -18,6 +20,7 @@ protected:
 
 protected:
 	// Called when the game starts or when spawned
+
 
 	virtual void Tick(float DeltaTime) override;
 
