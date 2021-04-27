@@ -23,6 +23,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Projectile");
 	FVector BulletSpawnPoint{ 100.f, 0.f, 0.f };
 
+	UPROPERTY(EditAnywhere, Category = "Setup");
+	UStaticMeshComponent* Paraglider;
+
 	//An additional collision for the attack.
 	class USphereComponent* AttackCollider = nullptr;
 
@@ -79,6 +82,7 @@ private:
 	void Attack();
 	void Glide();
 	void StopGliding();
+	int JumpState{ 0 };
 
 	bool Invulnerable{ false };
 	float TimeSinceLastShot{ ShootCooldown };
