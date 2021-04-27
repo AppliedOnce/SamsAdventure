@@ -35,6 +35,10 @@ AMainCharacter::AMainCharacter()
 	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
 	PlayerCamera->SetupAttachment(CameraArm, USpringArmComponent::SocketName);
 
+	Paraglider = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Paraglider"));
+	Paraglider->SetupAttachment(GetCapsuleComponent());
+	Paraglider->ToggleVisibility(false);
+
 	PlayerCollider = this->GetCapsuleComponent();
 
 	MovementComp = GetCharacterMovement();
@@ -58,6 +62,10 @@ void AMainCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	TimeSinceLastShot += DeltaTime;
+	if (!MovementComp->IsFalling() && Paraglider->IsVisible())
+	{
+		Paraglider->SetVisibility(false, true);
+	}
 }
 
 // Called to bind functionality to input
@@ -178,14 +186,13 @@ void AMainCharacter::Glide()
 	{
 		MovementComp->GravityScale = 0.2f;
 		MovementComp->AirControl = 0.3f;
+		Paraglider->SetVisibility(true, true);
 	}
 }
 
 void AMainCharacter::StopGliding()
 {
-	if (MovementComp->IsFalling())
-	{
-		MovementComp->GravityScale = 1.0f;
-		MovementComp->AirControl = 1.0f;
-	}
+	MovementComp->GravityScale = 1.0f;
+	MovementComp->AirControl = 1.0f;
+	Paraglider->SetVisibility(false, true);
 }
