@@ -52,7 +52,7 @@ void UPlayerHealth::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 	}
 }
 
-void UPlayerHealth::LoseHp(int Amount)
+void UPlayerHealth::LoseHp(float Amount)
 {
 	if (!bIsInvulnerable)
 	{
@@ -64,8 +64,8 @@ void UPlayerHealth::LoseHp(int Amount)
 		}
 		else
 		{
-			if (CurrentHealth <= 0)
-				CurrentHealth = 0;
+			if (CurrentHealth <= 0.0f)
+				CurrentHealth = 0.0f;
 			else
 				CurrentHealth -= Amount;
 
@@ -74,7 +74,7 @@ void UPlayerHealth::LoseHp(int Amount)
 	}
 }
 
-void UPlayerHealth::IncreaseHp(int Amount)
+void UPlayerHealth::IncreaseHp(float Amount)
 {
 	if (CurrentHealth >= MaxHealth)
 		CurrentHealth = MaxHealth;
@@ -82,12 +82,12 @@ void UPlayerHealth::IncreaseHp(int Amount)
 		CurrentHealth += Amount;
 }
 
-int UPlayerHealth::GetCurrentHp() const
+float UPlayerHealth::GetCurrentHp() const
 {
 	return CurrentHealth;
 }
 
-int UPlayerHealth::GetMaxHp() const
+float UPlayerHealth::GetMaxHp() const
 {
 	return MaxHealth;
 }

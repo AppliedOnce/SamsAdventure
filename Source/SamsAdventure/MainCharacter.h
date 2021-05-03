@@ -52,7 +52,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile");
 	int CurrentAmmo{ 0 };
 
-	UPROPERTY(EditAnywhere, Category = "Projectile");
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile");
 	int MaxAmmo{ 20 };
 
 	UPROPERTY(EditAnywhere, Category = "Projectile");

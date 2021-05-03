@@ -20,11 +20,11 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health");
-	int CurrentHealth{ 3 };
+	UPROPERTY(VisibleAnywhere, Category = "Health");
+	float CurrentHealth{ 3.0f };
 
 	UPROPERTY(EditAnywhere, Category = "Health");
-	int MaxHealth{ 3 };
+	float MaxHealth{ 3.0f };
 
 	UPROPERTY(EditAnywhere, Category = "Invulnerability");
 	float InvulnerableSeconds{ 1.f };
@@ -38,11 +38,13 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	void LoseHp(int Amount);
+	void LoseHp(float Amount);
 	UFUNCTION(BlueprintCallable)
-	void IncreaseHp(int Amount);
-	int GetCurrentHp() const;
-	int GetMaxHp() const;
+	void IncreaseHp(float Amount);
+	UFUNCTION(BlueprintCallable)
+	float GetCurrentHp() const;
+	UFUNCTION(BlueprintCallable)
+	float GetMaxHp() const;
 	void ShieldPlayer();
 	bool CheckShielded();
 private:
