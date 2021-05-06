@@ -34,10 +34,12 @@ void ASamsAdventureGameMode::Tick(float DeltaTime)
 
 void ASamsAdventureGameMode::TeleportPlayerToStart()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Teleport to: %s"), *Checkpoint.ToString())
 	PlayerCharacter->SetActorLocation(Checkpoint);
 }
 
 void ASamsAdventureGameMode::SetCheckpoint(FVector NewCheckpoint)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Setting checkpoint to: %s"), *NewCheckpoint.ToString())
 	Checkpoint = NewCheckpoint;
 }

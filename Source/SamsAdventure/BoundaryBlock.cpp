@@ -37,7 +37,9 @@ void ABoundaryBlock::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 {
 	if (OtherActor->IsA(AMainCharacter::StaticClass()))
 	{
-		GetWorld()->GetAuthGameMode<ASamsAdventureGameMode>()->TeleportPlayerToStart();
+		ASamsAdventureGameMode* GM = GetWorld()->GetAuthGameMode<ASamsAdventureGameMode>();
+
+		GM->TeleportPlayerToStart();
 	}
 }
 
