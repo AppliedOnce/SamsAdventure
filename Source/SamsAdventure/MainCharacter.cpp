@@ -110,12 +110,12 @@ void AMainCharacter::MoveRight(float Value)
 
 void AMainCharacter::Run()
 {
-	MovementComp->MaxWalkSpeed = 800.f;
+	MovementComp->MaxWalkSpeed = MovementComp->MaxWalkSpeed + 200.f;
 }
 
 void AMainCharacter::StopRunning()
 {
-	MovementComp->MaxWalkSpeed = 600.f;
+	MovementComp->MaxWalkSpeed = MovementComp->MaxWalkSpeed - 200.f;
 }
 
 void AMainCharacter::Shoot()
