@@ -6,6 +6,7 @@
 #include "PlayerHealth.h"
 #include "Components/SphereComponent.h"
 #include "BirdHunter.h"
+#include "TotemTrap.h"
 
 // Sets default values
 AEnemyBullet::AEnemyBullet()
@@ -54,8 +55,9 @@ void AEnemyBullet::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	// Do not destroy the bullet if it collides with the player or other bullets
-	if (!OtherActor->IsA(ABirdHunter::StaticClass()) && !OtherActor->IsA(AEnemyBullet::StaticClass()))
+	if (!OtherActor->IsA(ABirdHunter::StaticClass()) && !OtherActor->IsA(AEnemyBullet::StaticClass())&& !OtherActor->IsA(ATotemTrap::StaticClass()))
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Enemy bullet got hit by %s "), *OtherActor->GetName())
 		if (OtherActor->IsA(AMainCharacter::StaticClass()))
 		{
 			Cast<AMainCharacter>(OtherActor)->GetHealthComponent()->LoseHp(1);
