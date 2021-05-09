@@ -23,4 +23,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditAnywhere, Category = Setup);
+	class UStaticMeshComponent* OurVisibleComponent{ nullptr };
+
+	UPROPERTY(EditAnywhere, Category = Setup);
+	class UBoxComponent* OurCollider{ nullptr };
+
 };
