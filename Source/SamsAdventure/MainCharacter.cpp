@@ -142,12 +142,15 @@ void AMainCharacter::Shoot()
 void AMainCharacter::Attack() {
 	UWorld* SamsWorld = GetWorld();
 
-	UE_LOG(LogTemp, Warning, TEXT("Attack"));
 	if (SamsWorld)
 	{
 		SamsWorld->SpawnActor<ATailAttack>(AttackBlueprint, GetActorLocation()+ AttackSpawnPoint, GetActorRotation());
 	}
 	 AttackAnim = true;
+
+	 if (AttackAnim == true) {
+		 UE_LOG(LogTemp, Warning, TEXT("Anim"));
+	 }
 }
 
 void AMainCharacter::OnHit(UPrimitiveComponent* HitComponent,
