@@ -7,7 +7,7 @@
 #include "BirdHunter.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class SAMSADVENTURE_API ABirdHunter : public ABirdEnemy
@@ -23,7 +23,7 @@ public:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnywhere, Category = "AI")
-	class USphereComponent* PlayerSensingSphere{ nullptr };
+		class USphereComponent* PlayerSensingSphere{ nullptr };
 
 	UPROPERTY(EditAnywhere, Category = "Projectile");
 	FVector AttackSpawnPoint{ 100.f, 0.f, 0.f };
@@ -35,19 +35,19 @@ public:
 
 	bool InRange = false;
 
-public:
-
 	UFUNCTION()
-	void OnOverlap(UPrimitiveComponent* OverlappedComponent,
-		AActor* OtherActor, UPrimitiveComponent* OtherComponent,
-		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+		void OnOverlap(UPrimitiveComponent* OverlappedComponent,
+			AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 
 	UFUNCTION()
-	void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent,
-		AActor* OtherActor, UPrimitiveComponent* OtherComponent,
-		int32 OtherBodyIndex);
+		void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent,
+			AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+			int32 OtherBodyIndex);
 
 	void Shooting();
+	USphereComponent* GetVisionCollider();
+
 
 };

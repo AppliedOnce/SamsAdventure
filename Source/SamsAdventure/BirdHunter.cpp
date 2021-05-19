@@ -23,14 +23,14 @@ ABirdHunter::ABirdHunter()
 void ABirdHunter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	PlayerSensingSphere->OnComponentBeginOverlap.AddDynamic(this, &ABirdHunter::OnOverlap);
 	PlayerSensingSphere->OnComponentEndOverlap.AddDynamic(this, &ABirdHunter::OnOverlapEnd);
 }
 
 void ABirdHunter::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);	
+	Super::Tick(DeltaTime);
 	ShootingRythm += DeltaTime;
 	Shooting();
 
@@ -45,8 +45,8 @@ void ABirdHunter::OnOverlap(UPrimitiveComponent* OverlappedComponent,
 	if (OtherActor->IsA(AMainCharacter::StaticClass()))
 	{
 		InRange = true;
-		
-		
+
+
 	}
 }
 
@@ -78,4 +78,8 @@ void ABirdHunter::Shooting() {
 	}
 
 }
-//hei
+
+USphereComponent* ABirdHunter::GetVisionCollider()
+{
+	return PlayerSensingSphere;
+}
