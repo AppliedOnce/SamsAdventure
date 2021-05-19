@@ -73,6 +73,12 @@ public:
 	class UPlayerHealth* GetHealthComponent() const;
 	bool IsInvulnerable();
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation");
+	bool AttackAnim = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation");
+	bool JumpAnim = false;
+
 private:
 	void MoveForward(float Value);
 	void MoveRight(float Value);
@@ -82,6 +88,7 @@ private:
 	void Attack();
 	void Glide();
 	void StopGliding();
+	void AnimateJump();
 	int JumpState{ 0 };
 
 	bool Invulnerable{ false };

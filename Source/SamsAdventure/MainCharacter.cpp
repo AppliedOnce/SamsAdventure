@@ -60,8 +60,8 @@ void AMainCharacter::BeginPlay()
 void AMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 	TimeSinceLastShot += DeltaTime;
+	JumpAnim = MovementComp->IsFalling();
 	if (!MovementComp->IsFalling() && Paraglider->IsVisible())
 	{
 		Paraglider->SetVisibility(false, true);
@@ -83,6 +83,8 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &AMainCharacter::Run);
 	PlayerInputComponent->BindAction("Run", IE_Released, this, &AMainCharacter::StopRunning);
 }
+
+
 
 void AMainCharacter::MoveForward(float Value)
 {
@@ -145,7 +147,7 @@ void AMainCharacter::Attack() {
 	{
 		SamsWorld->SpawnActor<ATailAttack>(AttackBlueprint, GetActorLocation()+ AttackSpawnPoint, GetActorRotation());
 	}
-
+	 AttackAnim = true;
 }
 
 void AMainCharacter::OnHit(UPrimitiveComponent* HitComponent,
