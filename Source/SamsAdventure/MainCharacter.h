@@ -73,6 +73,9 @@ public:
 	class UPlayerHealth* GetHealthComponent() const;
 	bool IsInvulnerable();
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile");
+	bool AttackAnim = false;
+
 private:
 	void MoveForward(float Value);
 	void MoveRight(float Value);

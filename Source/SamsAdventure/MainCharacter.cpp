@@ -145,7 +145,7 @@ void AMainCharacter::Attack() {
 	{
 		SamsWorld->SpawnActor<ATailAttack>(AttackBlueprint, GetActorLocation()+ AttackSpawnPoint, GetActorRotation());
 	}
-
+	 AttackAnim = true;
 }
 
 void AMainCharacter::OnHit(UPrimitiveComponent* HitComponent,
