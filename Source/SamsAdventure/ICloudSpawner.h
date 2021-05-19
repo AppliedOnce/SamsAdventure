@@ -20,20 +20,19 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, Category = "Setup");
-	float TimeBetweenSpawn = 3.f;
+	float TimeBetweenSpawn = 60.f;
 
-	float TimeAlive = 0.f;
+	float TimeAlive = 60.f;
 
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditiAnywhere, Category = "Setup");
-	FVector ICloudSpawnPoint{ 0.f, 150.f, 0.f };
+	UPROPERTY(EditAnywhere, Category = "Setup");
+	FVector ICloudSpawnPoint{ 0.f, 200.f, 0.f };
 
 	UPROPERTY(EditAnywhere, Category = "Setup");
 	TSubclassOf<class AICloud> ICloudBlueprint;
 
-	//void ICloudThrough();
 };

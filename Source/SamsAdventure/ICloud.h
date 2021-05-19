@@ -20,18 +20,15 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, Category = "Setup");
-	UStaticMeshComponent* OurVisibleComponent{ nullptr };
+	class UStaticMeshComponent* OurVisibleComponent{ nullptr };
 
 	UPROPERTY(EditAnywhere, Category = "Setup");
-	class USphereComponent* Collider{ nullptr };
-
-	UPROPERTY(EditAnywhere, Category = "Setup");
-	float Speed = 100.f;
+	float Speed = 150.f;
 
 	float TimePresent = 0.f;
 
 	UPROPERTY(EditAnywhere, Category = "Setup");
-	float TimeToGetToTheOtherSide = 6.f;
+	float TimeToGetToTheOtherSide = 150.f;
 
 public:	
 	// Called every frame
