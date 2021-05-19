@@ -4,6 +4,7 @@
 #include "ICloudSpawner.h"
 #include "ICloud.h"
 
+
 // Sets default values
 AICloudSpawner::AICloudSpawner()
 {
@@ -32,12 +33,16 @@ void AICloudSpawner::Tick(float DeltaTime)
 
 		if (MainLevel)
 		{
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < 1; i++)
 			{
 				AICloud* icloud = MainLevel->SpawnActor<AICloud>(ICloudBlueprint, GetActorLocation() + ICloudSpawnPoint * i, GetActorRotation());
+
 				if (icloud)
 				{
 					icloud->Spawner = this;
+					UE_LOG(LogTemp, Log, TEXT("Cloud"));
+
+					TimeAlive = 0.f;
 				}
 			}
 		}

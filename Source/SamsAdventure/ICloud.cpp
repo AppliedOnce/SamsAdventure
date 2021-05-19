@@ -3,7 +3,6 @@
 
 #include "ICloud.h"
 #include "ICloudSpawner.h"
-#include "Components/SphereComponent.h"
 
 // Sets default values
 AICloud::AICloud()
@@ -11,13 +10,9 @@ AICloud::AICloud()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	Collider = CreateDefaultSubobject<USphereComponent>(TEXT("Collider"));
-	Collider->SetGenerateOverlapEvents(true);
-
-	RootComponent = Collider;
-	
 	OurVisibleComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OurVisibleComponent"));
-	OurVisibleComponent->SetupAttachment(RootComponent);
+
+	RootComponent = OurVisibleComponent;
 }
 
 // Called when the game starts or when spawned
@@ -37,9 +32,11 @@ void AICloud::Tick(float DeltaTime)
 
 	if (TimePresent > TimeToGetToTheOtherSide)
 	{
-		//Spawner->ICloudThrough();
 		this->Destroy();
 	}
 
+	FVector NewLocation = GetActorLocation();
+	NewLocation += -GetActorForwardVector() * Speed * DeltaTime;
+	SetActorLocation(NewLocation, false);
 }
 
