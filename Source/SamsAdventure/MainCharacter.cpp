@@ -76,6 +76,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("Forward", this, &AMainCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("Right", this, &AMainCharacter::MoveRight);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMainCharacter::AnimateJump);
 	PlayerInputComponent->BindAction("Glide", IE_Pressed, this, &AMainCharacter::Glide);
 	PlayerInputComponent->BindAction("Glide", IE_Released, this, &AMainCharacter::StopGliding);
 	PlayerInputComponent->BindAction("Shoot", IE_Pressed, this, &AMainCharacter::Shoot);
@@ -83,6 +84,11 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &AMainCharacter::Run);
 	PlayerInputComponent->BindAction("Run", IE_Released, this, &AMainCharacter::StopRunning);
 }
+void AMainCharacter::AnimateJump()
+{
+	JumpAnim = true;
+}
+
 
 void AMainCharacter::MoveForward(float Value)
 {
