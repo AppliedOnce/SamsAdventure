@@ -66,7 +66,7 @@ void AMainCharacter::Tick(float DeltaTime)
 	{
 		Paraglider->SetVisibility(false, true);
 	}
-	WalkAnim = false;
+	
 }
 
 // Called to bind functionality to input
@@ -96,7 +96,7 @@ void AMainCharacter::MoveForward(float Value)
 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 		AddMovementInput(Direction, Value);
-		WalkAnim = true;
+	
 	}
 }
 
@@ -109,7 +109,7 @@ void AMainCharacter::MoveRight(float Value)
 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 		AddMovementInput(Direction, Value);
-		WalkAnim = true;
+		
 	}
 }
 
