@@ -66,6 +66,7 @@ void AMainCharacter::Tick(float DeltaTime)
 	{
 		Paraglider->SetVisibility(false, true);
 	}
+	AttackAnim = false;
 	
 }
 
