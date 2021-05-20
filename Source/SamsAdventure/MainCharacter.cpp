@@ -152,9 +152,6 @@ void AMainCharacter::Attack() {
 	}
 	 AttackAnim = true;
 
-	 if (AttackAnim == true) {
-		 UE_LOG(LogTemp, Warning, TEXT("Anim"));
-	 }
 }
 
 void AMainCharacter::OnHit(UPrimitiveComponent* HitComponent,
@@ -162,6 +159,8 @@ void AMainCharacter::OnHit(UPrimitiveComponent* HitComponent,
 {
 	if (OtherActor->IsA(ABirdEnemy::StaticClass()))
 	{
+		Cast<ABirdEnemy>(OtherActor)->birbAttackAnim();
+	
 		HealthComp->LoseHp(1);
 		UE_LOG(LogTemp, Warning, TEXT("Player just hit %s, taking damage.\nPlayer health: %i"), *OtherActor->GetName(), HealthComp->GetCurrentHp());
 	}
