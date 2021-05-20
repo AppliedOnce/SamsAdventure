@@ -66,6 +66,7 @@ void AMainCharacter::Tick(float DeltaTime)
 	{
 		Paraglider->SetVisibility(false, true);
 	}
+	
 }
 
 // Called to bind functionality to input
@@ -95,6 +96,7 @@ void AMainCharacter::MoveForward(float Value)
 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 		AddMovementInput(Direction, Value);
+	
 	}
 }
 
@@ -107,6 +109,7 @@ void AMainCharacter::MoveRight(float Value)
 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 		AddMovementInput(Direction, Value);
+		
 	}
 }
 
