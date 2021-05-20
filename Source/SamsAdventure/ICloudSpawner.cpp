@@ -29,13 +29,13 @@ void AICloudSpawner::Tick(float DeltaTime)
 
 	if (TimeAlive > TimeBetweenSpawn)
 	{
-		UWorld* MainLevel = GetWorld();
+		UWorld* World = GetWorld();
 
-		if (MainLevel)
+		if (World)
 		{
 			for (int i = 0; i < 1; i++)
 			{
-				AICloud* icloud = MainLevel->SpawnActor<AICloud>(ICloudBlueprint, GetActorLocation() + ICloudSpawnPoint * i, GetActorRotation());
+				AICloud* icloud = World->SpawnActor<AICloud>(ICloudBlueprint, GetActorLocation() + ICloudSpawnPoint * i, GetActorRotation());
 
 				if (icloud)
 				{
