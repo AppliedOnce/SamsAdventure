@@ -32,10 +32,10 @@ protected:
 	UCapsuleComponent* PlayerCollider;
 
 	UCharacterMovementComponent* MovementComp;
-
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPlayerHealth* HealthComp;
-
+	
 	UPROPERTY(EditAnywhere, Category = "Melee");
 	TSubclassOf<class ATailAttack> AttackBlueprint;
 
@@ -44,7 +44,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Melee");
 	FVector AttackSpawnPoint{ 0.f, 0.f, 0.f };
-
+	
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent,
 		AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
@@ -81,6 +81,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation");
 	bool WalkAnim = false;
+
 
 private:
 	void MoveForward(float Value);
