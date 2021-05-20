@@ -121,7 +121,7 @@ void AMainCharacter::Run()
 
 void AMainCharacter::StopRunning()
 {
-	MovementComp->MaxWalkSpeed = 600.f;
+	MovementComp->MaxWalkSpeed = 450.f;
 }
 
 void AMainCharacter::Shoot()
