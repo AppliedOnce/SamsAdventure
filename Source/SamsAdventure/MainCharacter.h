@@ -79,6 +79,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation");
 	bool JumpAnim = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation");
+	bool WalkAnim = false;
+
 private:
 	void MoveForward(float Value);
 	void MoveRight(float Value);
