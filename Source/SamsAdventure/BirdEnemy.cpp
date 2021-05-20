@@ -7,6 +7,8 @@
 #include "Components/SphereComponent.h"
 #include "AmmoNut.h"
 
+
+
 // Sets default values
 ABirdEnemy::ABirdEnemy()
 {
@@ -64,4 +66,16 @@ void ABirdEnemy::SpawnPowerups()
 			World->SpawnActor<AActor>(PowerupBlueprint, GetActorLocation(), GetActorRotation());
 		}
 	}
+}
+
+
+void ABirdEnemy::birbAttackAnim()
+{
+	BirbAttackAnim = true;
+
+	if (BirbAttackAnim == true)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Anim"));
+	}
+
 }
