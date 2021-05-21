@@ -20,6 +20,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	float Counter = 0.f;
+	//float DeathCounter = 0.f;
+
 
 public:	
 	// Called every frame
@@ -42,7 +45,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation");
 	bool BirbAttackAnim = false;
 
+	//UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation");
+	//bool BirbDeath = false;
+
 	void birbAttackAnim();
+
+	void notBirbAttackAnim();
 
 
 private:
