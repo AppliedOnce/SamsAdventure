@@ -45,8 +45,10 @@ public:
 	void birbAttackAnim();
 
 
+
 private:
 	int Health{ 0 };
+
 
 	void SpawnPowerups();
 

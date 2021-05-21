@@ -68,6 +68,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void IAmDead();
 	void IncreaseAmmo(int Value);
 	bool IsAmmoFull() const;
 	class UPlayerHealth* GetHealthComponent() const;
@@ -81,6 +82,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation");
 	bool WalkAnim = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation");
+	bool Ded = false;
 
 
 private:

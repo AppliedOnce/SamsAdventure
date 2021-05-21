@@ -47,6 +47,8 @@ public:
 	float GetMaxHp() const;
 	void ShieldPlayer();
 	bool CheckShielded();
+
+	bool death = false;
 private:
 
 	float Timer{ 0.f };

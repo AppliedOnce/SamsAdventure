@@ -2,6 +2,7 @@
 
 
 #include "PlayerHealth.h"
+#include "MainCharacter.h"
 
 // Sets default values for this component's properties
 UPlayerHealth::UPlayerHealth()
@@ -64,10 +65,15 @@ void UPlayerHealth::LoseHp(float Amount)
 		}
 		else
 		{
-			if (CurrentHealth <= 0.0f)
+			if (CurrentHealth <= 0.0f) {
 				CurrentHealth = 0.0f;
-			else
+
+			
+			}
+			else 
 				CurrentHealth -= Amount;
+			
+			
 
 			bIsInvulnerable = true;
 		}
