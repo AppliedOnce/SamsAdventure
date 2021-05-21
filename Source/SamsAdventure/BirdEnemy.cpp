@@ -35,7 +35,7 @@ void ABirdEnemy::Tick(float DeltaTime)
 		BirbAttackAnim = false;
 	}
 
-	//if (BirbDeath = true && DeathCounter >= 50)
+	//if (BirbDeath = true && DeathCounter >= 5)
 	//{
 	//	Destroy();
 	//	SpawnPowerups();
