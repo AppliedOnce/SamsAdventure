@@ -27,6 +27,19 @@ void ABirdEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	Counter += (DeltaTime);
+	//DeathCounter += (DeltaTime);
+
+	if (Counter >= 0.5)
+	{
+		BirbAttackAnim = false;
+	}
+
+	//if (BirbDeath = true && DeathCounter >= 50)
+	//{
+	//	Destroy();
+	//	SpawnPowerups();
+	//}
 }
 
 // Called to bind functionality to input
@@ -41,8 +54,12 @@ void ABirdEnemy::GotHit()
 	Health--;
 	if (Health <= 0)
 	{
-		SpawnPowerups();
+		//BirbDeath = true;
+		//DeathCounter = 0;
+
 		Destroy();
+		SpawnPowerups();
+
 	}
 }
 
@@ -76,6 +93,7 @@ void ABirdEnemy::birbAttackAnim()
 	if (BirbAttackAnim == true)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Anim"));
+		Counter = 0;
 	}
 
 }

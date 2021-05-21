@@ -13,6 +13,7 @@
 #include "BirdEnemy.h"
 #include "PlayerHealth.h"
 #include "EnemyBullet.h"
+#include <dos.h>
 
 
 // Sets default values
@@ -163,7 +164,9 @@ void AMainCharacter::OnHit(UPrimitiveComponent* HitComponent,
 	
 		HealthComp->LoseHp(1);
 		UE_LOG(LogTemp, Warning, TEXT("Player just hit %s, taking damage.\nPlayer health: %i"), *OtherActor->GetName(), HealthComp->GetCurrentHp());
+	
 	}
+
 }
 
 void AMainCharacter::IncreaseAmmo(int Value)
